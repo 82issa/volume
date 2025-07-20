@@ -1,0 +1,24 @@
+#!/bin/sh
+
+if [ "$#" -ne 1 ]; then
+  echo "Usage: $0 { mute | up | down }"
+  exit 1
+fi
+
+if [ "$1" = "mute" ];then
+  eval "$(mixer -f /dev/mixer0 vol.mute | awk -F= '{print "mixer -f /dev/mixer0 vol.mute=" ($2 == "off" ? "on": "off")}')"
+  exit 0
+fi
+
+if [ "$1" = "down" ];then
+  eval "$(mixer -f /dev/mixer0 vol.volume | awk -F: '{printf "mixer -f /dev/mixer0 vol.volume=%.2f\n", $2 - 0.05}')"
+  exit 0
+fi
+
+if [ "$1" = "up" ];then
+  eval "$(mixer -f /dev/mixer0 vol.volume | awk -F: '{printf "mixer -f /dev/mixer0 vol.volume=%.2f\n", $2 + 0.05}')"
+  exit 0
+fi
+
+echo "Unrecognized argument."
+exit 2
