@@ -1,4 +1,4 @@
-# volume
+# Volume
 FreeBSD sound helper script
 
 # About:
@@ -15,7 +15,9 @@ created this to make binding the script to keypresses a little easier.
   If properly installed, trigger commands as needed. Examples
   
   volume up
+  
   volume down
+  
   volume mute
 
   These should be self evident as to what they do.
